@@ -35,7 +35,7 @@ jobs:
     - name: Manual build
       run : |
         ./dev.sh layout Release linux-x64
-      working-directory: src
+      working-directory: webApp
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
