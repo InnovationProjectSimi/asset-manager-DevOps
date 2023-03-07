@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title%}Update Asset{% endblock %}
+
+{% block pageContent %}
+<h1 class="title">Update Asset</h1>
+<p class="center">Update details about an asset here</p>
+<form class="center" method="post">
+    <h3>Name</h2>
+    <input 
+        type="text" 
+        id="newName" 
+        name="newName"
+        value="{{Asset.name}}"
+    >
+    <h3>Description</h2>
+    <input 
+        type="text" 
+        id="newDescription" 
+        name="newDescription"
+        value="{{Asset.description}}"
+    >
+    <br>
+    <button class="submitButton" type="submit">Update asset details</button>
+</form>{% endblock %}

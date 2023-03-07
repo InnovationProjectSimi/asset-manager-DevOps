@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title%}View Assets{% endblock %}
+
+{% block pageContent %}
+<h1 class="title">View Assets</h1>
+<p class="center">All of your assets are available to view below!</p>
+
+{% for index in range(listSize)%}
+<div style="background-color: lightgrey;">
+    <div>
+        <h3 class="center"> {{assets[index].name}} </h3>
+        <p class="center"> {{assets[index].description}}</p>
+    </div>
+        <p class="center">Quantity: {{userAssets[index].quantity}}</p>
+        <p class="center">Date: {{userAssets[index].dateStored}}</p>
+    <div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- Use the base template -->
+{% extends "base.html" %}
+{% block title%}Delete Asset{% endblock %}
+
+{% block pageContent %}
+<!-- Alter page content to include delete asset page components -->
+<h1 class="title">Delete Asset</h1>
+<p class="center">Delete an asset including all entries for users which own this asset, or delte a specific user's asset.</p>
+<form name="form-name" value="deleteAsset" class="floatHalf center" method="post">
+    <h3>Asset Name</h2>
+    <select id="assetList" name="assetList">
+        {% for Asset in Assets %}
+            <option value="{{Asset.id}}">{{ Asset.name}}</option>
+        {% endfor %}
+    </select>  
+    <br>
+    <button class="submitButton" type="submit">Delete asset</button>
+</form>
+<form name="form-name" value="deleteUserAsset" class="floatHalf center" method="post">
+    <h3>User Asset</h2>
+    <select id="userAssetList" name="userAssetList">
+        {% for UserAsset in UserAssets %}
+            <option value="{{UserAsset.UserAssetID}}">AssetID: {{ UserAsset.assetID}}, quantity: {{ UserAsset.quantity}}</option>
+        {% endfor %}
+    </select>  
+    <br>
+    <button class="submitButton" type="submit">Delete user asset</button>
+</form>
+{% endblock %}
