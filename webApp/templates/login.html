@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title%}Login{% endblock %}
+
+{% block pageContent %}
+<h1 class="title">Log In Page</h1>
+<p class="center">Log In to Asset Manager below.</p>
+<p class="center">If you do not have an account navigate to the Sign Up page to create one.</p>
+<form class="center" method="post">
+    <h3>Username</h2>
+    <input 
+        type="text" 
+        id="username" 
+        name="username"
+        placeholder="Enter username"
+    >
+    <h3>Password</h2>
+    <input 
+        type="password" 
+        id="password" 
+        name="password"
+        placeholder="Enter password"
+    >
+    <br>
+    <button class="submitButton" type="submit">Submit</button>
+</form>{% endblock %}
