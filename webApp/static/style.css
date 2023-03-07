@@ -1,0 +1,66 @@
+/* Create some basic css for the web apps interface */
+* {
+  font-family: Helvetica, Arial;
+ }
+
+body {
+  margin: 0;
+}
+
+.navBar {
+  overflow: hidden;
+  background-color:darkgrey;
+}
+
+.navBar a {
+  float: left;
+  color: black;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navBar a:hover {
+  background-color: aqua;
+}
+
+.title {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+  float: center;
+}
+
+.submitButton {
+  margin-top: 10px;
+  padding: 15px 60px;
+  text-align: center;
+  background-color: white;
+  border: 2px solid aqua;
+  transition-duration: 0.5s;
+}
+
+.submitButton:hover {
+  background-color: aqua;
+}
+
+.informationAlert {
+  background-color:gold;
+  color: black;
+  padding: 4px;
+}
+
+.successAlert {
+  background-color:darkseagreen;
+  color: black;
+  padding: 4px;
+}
+
+.floatHalf {
+  width: 40%;
+  float: left;
+  padding: 15px;
+}

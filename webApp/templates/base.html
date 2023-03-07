@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+        <!-- Create title block which can be altered with the default Home -->
+        <title>{% block title%}Home{% endblock %}</title>
+        <body>
+            <!-- Create a nav bar with all the pages listed -->
+            <div class="navBar">
+                <a class="active" href="/">Home</a>
+                <a id="viewAssets" href="/viewAssets">View Assets</a>
+                <a id="assAssets" href="/addAsset">Add Assets</a>
+                <a id="updateAssets" href="/updateAsset">Update Assets</a>
+                <a id="deleteAssets" href="/deleteAsset">Delete Assets</a>
+                <a style="float: right;" id="signup" href="/logout">logout</a>
+            </div>
+
+            <!-- Check for alerts and display them
+                 Alerts are displayed to give the user information about their interactions
+             -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {%if messages %}
+                {%for category, message in messages %}
+                    {% if category == "Information" %}
+                        <div class="informationAlert" role="alert">
+                            {{message}}
+                        </div>
+                    {% else %}
+                        <div class="successAlert" role="alert">
+                            {{message}}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <div>
+                <!-- A block for page content that can altered in each template -->
+                {% block pageContent %}
+                {% endblock %}
+            </div>
+
+        </body>
+    </head>
+</html>
