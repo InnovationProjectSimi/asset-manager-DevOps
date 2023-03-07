@@ -1,0 +1,46 @@
+<!-- Use the base template -->
+{% extends "base.html" %}
+{% block title%}Add Asset{% endblock %}
+
+{% block pageContent %}
+<!-- Alter page content to include add asset page components -->
+<h1 class="title">Add Asset</h1>
+<p class="center">Use this page to add an asset to your account!</p>
+
+<!-- Create a form for the data about the new asset 
+     Create the relevant fields to be posted back to the application
+ -->
+<form class="center" method="post">
+    <h3>Asset Name</h2>
+    <input 
+        type="text" 
+        id="assetName" 
+        name="assetName"
+        placeholder="Enter asset name"
+    >
+    <h3>Description</h2>
+    <input 
+        type="text" 
+        id="description" 
+        name="description"
+        placeholder="Enter description of asset"
+    >
+    <h3>Quantity</h2>
+    <input 
+        type="number" 
+        min="1"
+        id="quantity" 
+        name="quantity"
+        placeholder="Enter quantity"
+    >
+    <h3>Date of asset recieved</h2>
+    <input 
+        type="date" 
+        id="date" 
+        name="date"
+        placeholder="Enter date"
+    >
+    <br>
+    <!-- Submit button to post the form data -->
+    <button class="submitButton" type="submit">Add Asset</button>
+</form>{% endblock %}
