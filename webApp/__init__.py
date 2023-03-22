@@ -8,22 +8,23 @@ from flask_login import LoginManager
 appDB = SQLAlchemy()
 DB_NAME = "assetManagerDatabase.db"
 
+
 # Function to create the app
 def create_app():
     # No parameters
     # Returns 1: app which is the flask web application creates
     # This functions purpose is to set up and create the asset manager web application
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = "wiuvbisv7374yg438h$%^&"
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(DB_NAME)
+    app.config["SECRET_KEY"] = "wiuvbisv7374yg438h$%^&"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{}".format(DB_NAME)
     appDB.init_app(app)
 
     from .views import views
     from .auth import auth
 
     # Register blueprints for webapp routes
-    app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(auth, url_prefix="/")
 
     from .models import User
 
@@ -40,6 +41,7 @@ def create_app():
         return User.query.get(int(id))
 
     return app
+
 
 # Function to create the database
 def create_database(app):
