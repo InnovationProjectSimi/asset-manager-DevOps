@@ -20,6 +20,7 @@ def unexpected_error(e):
     current_app.logger.error("Error 500 unexpected error")
     return render_template("500.html"), 500
 
+
 # App will only run if run from this file
 if __name__ == "__main__":
     app.run(debug=False)
