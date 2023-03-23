@@ -7,6 +7,7 @@ from flask_login import LoginManager
 # Initialise the database and file name variables
 appDB = SQLAlchemy()
 
+
 # Function to create the app
 def create_app(DB_URI, DB_NAME):
     # No parameters
