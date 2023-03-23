@@ -11,6 +11,7 @@ from flask import (
 )
 from flask_login import login_required, current_user
 from .models import UserAsset, Asset, appDB
+from .functions import sanitise_input
 
 # Create a blueprint for a collection of routes for the website viewing components
 views = Blueprint("views", __name__)
@@ -57,17 +58,17 @@ def addAsset():
         formData = request.form
         # Get any existing asset which match the same of the asset the user entered
         existingAsset = Asset.query.filter_by(
-            name=(formData.get("assetName").lower())
+            name = sanitise_input(formData.get("assetName").lower())
         ).first()
 
         # Validation of the form data
         # Check asset name is atleast 2 characters in length
-        if len(formData.get("assetName")) < 2:
+        if len(sanitise_input(formData.get("assetName"))) < 2:
             current_app.logger.warning("Add asset failed - asset name too short")
             # Notify the user of the problem
             flash("Asset name is not long enough", category="Information")
         # Check description is not empty
-        elif formData.get("description") == "":
+        elif sanitise_input(formData.get("description")) == "":
             current_app.logger.warning("Add asset failed - no asset description")
             # Notify the user of the problem
             flash("Must add a desciption", category="Information")
@@ -107,7 +108,7 @@ def addAsset():
             else:
                 # In this case the users new description is appended to the existing description and add the asset to the user
                 existingAsset.description = "{}. {}".format(
-                    existingAsset.description, formData.get("description")
+                    existingAsset.description, sanitise_input(formData.get("description"))
                 )
                 dateFormat = datetime.datetime(
                     *[
@@ -140,8 +141,8 @@ def addAsset():
         else:
             # Add the asset to the database
             new_asset = Asset(
-                name=(formData.get("assetName")).lower(),
-                description=formData.get("description"),
+                name= sanitise_input(formData.get("assetName")).lower(),
+                description= sanitise_input(formData.get("description")),
             )
             appDB.session.add(new_asset)
             appDB.session.commit()
@@ -210,16 +211,16 @@ def updateSelectedAsset(name):
     # Check if the request is a post - A submitted form
     if request.method == "POST":
         existingAsset = Asset.query.filter_by(
-            name=(request.form.get("newName")).lower()
+            name=sanitise_input((request.form.get("newName")).lower())
         ).first()
         # Validation of the form data
         # Check new name is atleast 2 characters in length
-        if len(request.form.get("newName")) < 2:
+        if len(sanitise_input(request.form.get("newName"))) < 2:
             current_app.logger.warning("Update asset failed - asset name too short")
             # Notify the user of the problem
             flash("Asset name is not long enough", category="Information")
         # Check new description is not empty
-        elif request.form.get("newDescription") == "":
+        elif sanitise_input(request.form.get("newDescription")) == "":
             current_app.logger.warning("Update asset failed - no asset description")
             # Notify the user of the problem
             flash("Must add a description", category="Information")
@@ -234,8 +235,8 @@ def updateSelectedAsset(name):
         # If the entered data passes all checks
         else:
             # Update the name and description of the asset
-            asset.name = (request.form.get("newName")).lower()
-            asset.description = request.form.get("newDescription")
+            asset.name = sanitise_input((request.form.get("newName")).lower())
+            asset.description = sanitise_input(request.form.get("newDescription"))
             appDB.session.commit()
             current_app.logger.info("Update asset success")
             # Notify the user of the success

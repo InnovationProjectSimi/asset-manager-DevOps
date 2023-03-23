@@ -12,6 +12,7 @@ from .models import User
 from werkzeug.security import check_password_hash, generate_password_hash
 from . import appDB
 from flask_login import login_user, login_required, logout_user, current_user
+from .functions import sanitise_input
 
 # Create a blueprint for a collection of routes for the websites authentication components
 auth = Blueprint("auth", __name__)
@@ -22,8 +23,8 @@ auth = Blueprint("auth", __name__)
 def login():
     # Check if the request is a post - A submitted form
     if request.method == "POST":
-        username = request.form.get("username").lower()
-        password = request.form.get("password")
+        username = sanitise_input(request.form.get("username").lower())
+        password = sanitise_input(request.form.get("password"))
 
         # Check if a user exist with the username entered
         user = User.query.filter_by(username=username).first()
@@ -81,9 +82,9 @@ def signUp():
     # Check if the request is a post - A submitted form
     if request.method == "POST":
         formData = request.form
-        username = formData.get("username").lower()
-        password = formData.get("password")
-        confPassword = formData.get("confPassword")
+        username = sanitise_input(formData.get("username").lower())
+        password = sanitise_input(formData.get("password"))
+        confPassword = sanitise_input(formData.get("confPassword"))
 
         user = User.query.filter_by(username=username).first()
         # Validation for user signing up
