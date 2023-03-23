@@ -3,7 +3,9 @@ from webApp import create_app
 from flask import render_template, current_app
 
 # Create the app
-app = create_app()
+DB_NAME = "assetManagerDatabase.db"
+DB_URI = "sqlite:///{}".format(DB_NAME)
+app = create_app(DB_URI, DB_NAME)
 
 
 # Create custom error handling pages
