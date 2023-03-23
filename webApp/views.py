@@ -58,7 +58,7 @@ def addAsset():
         formData = request.form
         # Get any existing asset which match the same of the asset the user entered
         existingAsset = Asset.query.filter_by(
-            name = sanitise_input(formData.get("assetName").lower())
+            name=sanitise_input(formData.get("assetName").lower())
         ).first()
 
         # Validation of the form data
@@ -108,7 +108,8 @@ def addAsset():
             else:
                 # In this case the users new description is appended to the existing description and add the asset to the user
                 existingAsset.description = "{}. {}".format(
-                    existingAsset.description, sanitise_input(formData.get("description"))
+                    existingAsset.description,
+                    sanitise_input(formData.get("description")),
                 )
                 dateFormat = datetime.datetime(
                     *[
@@ -141,8 +142,8 @@ def addAsset():
         else:
             # Add the asset to the database
             new_asset = Asset(
-                name= sanitise_input(formData.get("assetName")).lower(),
-                description= sanitise_input(formData.get("description")),
+                name=sanitise_input(formData.get("assetName")).lower(),
+                description=sanitise_input(formData.get("description")),
             )
             appDB.session.add(new_asset)
             appDB.session.commit()
