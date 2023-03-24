@@ -14,6 +14,7 @@ def test_password_hashing():
     assert new_user.password != "Pizza567!"
     assert generate_password_hash("Pizza567!", method="sha256") != "Pizza567!"
 
+
 # Test to check inouts are sanitised
 def test_sanitise():
     # Test -- to empty
@@ -33,17 +34,17 @@ def test_sanitise():
     assert mock_sanitise_input(string) == "Test string 10Percent"
 
 
-
 # Test the signup validation
 def test_signup():
-    request={
+    request = {
         "method": "GET",
         "form": {
             "username": "use",
             "password": "passWord1!",
-            "confPassword": "passWord1!"
-        }}
-    
+            "confPassword": "passWord1!",
+        },
+    }
+
     # Test doesnt allow get method
     assert mock_signUp(request) == "GET method"
 
@@ -80,5 +81,3 @@ def test_signup():
     request["form"]["password"] = "Password1!!!"
     request["form"]["confPassword"] = "Password1!!!"
     assert mock_signUp(request) == "Success"
-    
-
